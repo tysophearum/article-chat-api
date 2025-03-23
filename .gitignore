@@ -1,4 +1,10 @@
+# Node modules
 node_modules
+
+# FAISS embeddings and scrape results
 faiss_embeddings
 scrape_results_html
 scrape_results_text
+
+# Environment variables
+.env

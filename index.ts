@@ -5,10 +5,12 @@ import { Document } from "@langchain/core/documents";
 import { Logger, printResultContent, scrapeTextWithPuppeteer, getChatResponse, textSplitterBySentences, checkFileExist, getEmbeddingPath, getChatResponseGemini, saveTextToFile, getScrapeResultHTMLPath, getScrapeResultTextPath, getGeminiEmbeddingModel, readTextFromFile, classifyQuestion, getGeminiSummary } from "./utils";
 import { huggingFaceEmbeddings } from './constant'
 const cors = require('cors');
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(cors());
-const port: number = 3000;
+const port: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 app.use(bodyParser.json());
 
@@ -34,7 +36,6 @@ app.post("/ask", async (req: Request, res: Response): Promise<any> => {
   }
 
   let response = '';
-  console.log(classifyQuestion(question.question) === 'summary', classifyQuestion(question.question));
   
   if (classifyQuestion(question.question) === 'summary') {
     const article = readTextFromFile(`${getScrapeResultTextPath(question.url)}.txt`) || '';

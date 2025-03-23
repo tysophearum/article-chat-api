@@ -44,7 +44,7 @@ export async function getChatResponse(client: any, question: string, context: st
 }
 
 export async function getChatResponseGemini(question: string, context: string) {
-  const genAI = new GoogleGenerativeAI("AIzaSyCdQzAQAwL-iqK_VC5-AC7KP3x4pG5v4s8");
+  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   
   const prompt = `
@@ -67,7 +67,7 @@ Please respond strictly in **Markdown format**.
 }
 
 export async function getGeminiSummary(question: string, context: string) {
-  const genAI = new GoogleGenerativeAI("AIzaSyCdQzAQAwL-iqK_VC5-AC7KP3x4pG5v4s8");
+  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   
   const prompt = `

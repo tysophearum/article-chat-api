@@ -1,14 +1,16 @@
 import { OpenAI } from "openai";
 import { HuggingFaceInferenceEmbeddings } from "@langchain/community/embeddings/hf";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const openAIClient = new OpenAI({
-    apiKey: "30a70daad7954b12b3ca3fa1a2358fe1", // Replace with your actual API key
+    apiKey: process.env.OPENAI_API_KEY, // Replace with your actual API key
     baseURL: "https://api.aimlapi.com/",
 });
 
 export const huggingFaceEmbeddings = new HuggingFaceInferenceEmbeddings({
-  apiKey: "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", // In Node.js defaults to process.env.HUGGINGFACEHUB_API_KEY
+  apiKey: process.env.HUGGINGFACEHUB_API_KEY, // In Node.js defaults to process.env.HUGGINGFACEHUB_API_KEY
   model: 'sentence-transformers/all-MiniLM-L6-v2'
 });
 
