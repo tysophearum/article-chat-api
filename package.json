@@ -1,0 +1,35 @@
+{
+  "name": "langchain-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "dev": "nodemon --exec ts-node index.ts --ignore faiss_index/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "@huggingface/inference": "^2.8.1",
+    "@langchain/community": "^0.3.34",
+    "@langchain/core": "^0.3.42",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "faiss-node": "^0.5.1",
+    "langchain": "^0.3.19",
+    "nodemon": "^3.1.9",
+    "openai": "^4.86.2",
+    "puppeteer": "^24.4.0",
+    "ts-node": "^10.9.2",
+    "youtubei.js": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "typescript": "^5.8.2"
+  }
+}

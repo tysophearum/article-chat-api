@@ -1,0 +1,4 @@
+node_modules
+faiss_embeddings
+scrape_results_html
+scrape_results_text
