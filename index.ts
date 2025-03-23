@@ -4,6 +4,7 @@ import { FaissStore } from "@langchain/community/vectorstores/faiss";
 import { Document } from "@langchain/core/documents";
 import { Logger, printResultContent, scrapeTextWithPuppeteer, getChatResponse, textSplitterBySentences, checkFileExist, getEmbeddingPath, getChatResponseGemini, saveTextToFile, getScrapeResultHTMLPath, getScrapeResultTextPath, getGeminiEmbeddingModel, readTextFromFile, classifyQuestion, getGeminiSummary } from "./utils";
 import { huggingFaceEmbeddings } from './constant'
+import { VercelRequest, VercelResponse } from '@vercel/node';
 const cors = require('cors');
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,7 +25,7 @@ interface Question {
 }
 
 // Get all users
-app.post("/ask", async (req: Request, res: Response): Promise<any> => {
+app.post("/ask", async (req: VercelRequest, res: Response): Promise<any> => {
   const question: Question = req.body;
   if (!question.url) {
     res.status(400).json({ message: "url is required" })
@@ -52,7 +53,7 @@ app.post("/ask", async (req: Request, res: Response): Promise<any> => {
   return res.json({ success: true, response });
 });
 
-app.post("/embed", async (req: Request, res: Response): Promise<any> => {
+app.post("/embed", async (req: VercelRequest, res: Response): Promise<any> => {
   const link: Link = req.body;
   let scrapeResult: { cleanedText: string; html: string | null; } | null = null;
   if (checkFileExist(`${getScrapeResultHTMLPath(link.url)}.txt`)) {
@@ -98,7 +99,7 @@ app.post("/embed", async (req: Request, res: Response): Promise<any> => {
   return res.json({ success: true, page: scrapeResult?.html })
 });
 
-app.post("/test", async (req: Request, res: Response): Promise<any> => {
+app.post("/test", async (req: VercelRequest, res: Response): Promise<any> => {
   const model = getGeminiEmbeddingModel('models/text-embedding-004');
   const result = await model.embedContent("What is the meaning of life?");
   return res.json({ result })

@@ -12,5 +12,6 @@
     "maxNodeModuleJsDepth": 10
     //  "module": "nodenext",
   },
-  "include": ["src/**/*"]
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
 }
