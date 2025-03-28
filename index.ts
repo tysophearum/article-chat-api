@@ -56,15 +56,19 @@ app.post("/ask", async (req: VercelRequest, res: Response): Promise<any> => {
 app.post("/embed", async (req: VercelRequest, res: Response): Promise<any> => {
   const link: Link = req.body;
   let scrapeResult: { cleanedText: string; html: string | null; } | null = null;
+  console.log('Scrapping with link: ', link.url);
   if (checkFileExist(`${getScrapeResultHTMLPath(link.url)}.txt`)) {
+    console.log('File aready exist');
     scrapeResult = {html: readTextFromFile(`${getScrapeResultHTMLPath(link.url)}.txt`), cleanedText: ''}
   }
   else {
+    console.log('scrapping with puppeteer.');
     scrapeResult = await scrapeTextWithPuppeteer(link.url);
   }
 
   const web = getEmbeddingPath(link.url);
   if (checkFileExist(web)) {
+    console.log('Embedding aready exist');
     return res.json({ success: true, page: scrapeResult?.html })
   }
   const documents: Document[] = [
