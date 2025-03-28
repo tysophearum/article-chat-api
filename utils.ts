@@ -4,6 +4,7 @@ import { FAISS_BASE, SCRAPE_RESULT_HTML_BASE, SCRAPE_RESULT_TEXT_BASE } from "./
 import * as cheerio from 'cheerio';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 import path from 'path';
+const puppeteer = require('puppeteer');
 
 export async function getChatResponse(client: any, question: string, context: string) {
   try {
@@ -112,7 +113,6 @@ export const printResultContent = (prefix: string, docs: Document[]) => {
 }
 
 export async function scrapeTextWithPuppeteer(url: string): Promise<{ cleanedText: string; html: string | null; } | null> {
-  const puppeteer = require('puppeteer');
 
   try {
     const browser = await puppeteer.launch();
