@@ -115,7 +115,11 @@ export const printResultContent = (prefix: string, docs: Document[]) => {
 export async function scrapeTextWithPuppeteer(url: string): Promise<{ cleanedText: string; html: string | null; } | null> {
 
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: '/usr/bin/chromium-browser',
+      headless: 'new', 
+      args: ['--no-sandbox']
+    });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' }); // Wait for network to be idle
 
